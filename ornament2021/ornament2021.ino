@@ -18,16 +18,13 @@
 #define LED6 PIN_PC4
 
 // PWM level for maximum brightness to light up an LED bank (out of 255)
-#define MAX_BRIGHTNESS 64
+#define MAX_BRIGHTNESS 255
 
 // Time between lighting up an unlit LED
-#define NEW_LIGHT_TIME_MS 750
-
-// Percent chance to light up an unlit LED when the time comes
-#define NEW_LIGHT_PERCENT 50
+#define NEW_LIGHT_TIME_MS 200
 
 // Time between each level of dimming
-#define FADE_TIME_MS 100
+#define FADE_TIME_MS 10
 
 #define LED_COUNT 6
 const int LEDS[LED_COUNT] = {LED1, LED2, LED3, LED4, LED5, LED6};
@@ -64,7 +61,7 @@ void loop()
     {
         int r = random(LED_COUNT);
 
-        if (LEDLevels[r] == 0 && random(100) < NEW_LIGHT_PERCENT)
+        if (LEDLevels[r] == 0)
         {
             LEDLevels[r] = MAX_BRIGHTNESS;
             analogWrite(LEDS[r], LEDLevels[r]);
